@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: 'Cormo Bold';
+    src: url('./fonts/CormorantGaramond-Bold.ttf') format('truetype');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'Cormo';
+    src: url('./fonts/CormorantGaramond-Regular.ttf') format('truetype');
+    font-weight: normal;
+  }
+  
+  @font-face {
+    font-family: 'Cormo Light';
+    src: url('./fonts/CormorantGaramond-Light.ttf') format('truetype');
+    font-weight: lighter;
+  }
+  
+  @font-face {
+    font-family: 'Proza Bold';
+    src: url('./fonts/ProzaLibre-Bold.ttf') format('truetype');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'Proza';
+    src: url('./fonts/ProzaLibre-Regular.ttf') format('truetype');
+    font-weight: normal;
+  }
+  
+*, *::after, *::before {
+    font-family: 'Proza', sans-serif;
+} 
+
+.font-text {
+    font-family: 'Proza', sans-serif;
+    font-weight: normal;
+}
+
+.font-text-b {
+    font-family: 'Proza Bold', sans-serif;
+    font-weight: bold;
+}
+
+.font-head {
+    font-family: 'Cormo', sans-serif;
+    font-weight: normal;
+}
+
+.font-head-l {
+    font-family: 'Cormo Light', sans-serif;
+    font-weight: lighter;
+}
+
+.font-head-b {
+    font-family: 'Cormo Bold', sans-serif;
+    font-weight: bold;
+}
+
+
