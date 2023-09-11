@@ -1,9 +1,5 @@
 /* eslint-disable */
-import Navbar from "./components/Navbar"
-import Carousel from "./components/Carousel"
-import Panel from "./components/Panel"
-import Homepage from "./pages/HomePage"
-
+import Homepage from './pages/Homepage'
 import cardData from "./utils/cardData"
 import features from "./utils/featuresData"
 
