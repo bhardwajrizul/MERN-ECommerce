@@ -5,31 +5,31 @@
 
 @font-face {
     font-family: 'Cormo Bold';
-    src: url('./fonts/CormorantGaramond-Bold.ttf') format('truetype');
+    src: url('/fonts/CormorantGaramond-Bold.ttf') format('truetype');
     font-weight: bold;
   }
   
   @font-face {
     font-family: 'Cormo';
-    src: url('./fonts/CormorantGaramond-Regular.ttf') format('truetype');
+    src: url('/fonts/CormorantGaramond-Regular.ttf') format('truetype');
     font-weight: normal;
   }
   
   @font-face {
     font-family: 'Cormo Light';
-    src: url('./fonts/CormorantGaramond-Light.ttf') format('truetype');
+    src: url('/fonts/CormorantGaramond-Light.ttf') format('truetype');
     font-weight: lighter;
   }
   
   @font-face {
     font-family: 'Proza Bold';
-    src: url('./fonts/ProzaLibre-Bold.ttf') format('truetype');
+    src: url('/fonts/ProzaLibre-Bold.ttf') format('truetype');
     font-weight: bold;
   }
   
   @font-face {
     font-family: 'Proza';
-    src: url('./fonts/ProzaLibre-Regular.ttf') format('truetype');
+    src: url('/fonts/ProzaLibre-Regular.ttf') format('truetype');
     font-weight: normal;
   }
   
