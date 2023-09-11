@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 /* eslint-disable */
 function Panel( { children , className, ...rest} ) {
     let finalClasses 
-    = classNames('border rounded bg-white w-full', className)
+    = classNames('border rounded border-0 bg-white w-full', className)
     
     finalClasses = twMerge(finalClasses);
 

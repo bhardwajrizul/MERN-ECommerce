@@ -37,27 +37,27 @@
     font-family: 'Proza', sans-serif;
 } 
 
-.font-text {
+.font-t {
     font-family: 'Proza', sans-serif;
     font-weight: normal;
 }
 
-.font-text-b {
+.font-t-b {
     font-family: 'Proza Bold', sans-serif;
     font-weight: bold;
 }
 
-.font-head {
+.font-h {
     font-family: 'Cormo', sans-serif;
     font-weight: normal;
 }
 
-.font-head-l {
+.font-h-l {
     font-family: 'Cormo Light', sans-serif;
     font-weight: lighter;
 }
 
-.font-head-b {
+.font-h-b {
     font-family: 'Cormo Bold', sans-serif;
     font-weight: bold;
 }
