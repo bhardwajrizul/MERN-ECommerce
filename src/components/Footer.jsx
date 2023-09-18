@@ -2,10 +2,10 @@ export default function Footer() {
     return (
         <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
             <nav className="grid grid-flow-col gap-4">
-                <a className="link link-hover text-xl font-h">|  About us |</a>
-                <a className="link link-hover text-xl font-h">|  Contact |</a>
-                <a className="link link-hover text-xl font-h">|  Shop More! |</a>
-                <a className="link link-hover text-xl font-h">|  Terms & Conditions |</a>
+                <a className="link link-hover text-xl font-h">| About us |</a>
+                <a className="link link-hover text-xl font-h">| Contact |</a>
+                <a className="link link-hover text-xl font-h">| Shop More! |</a>
+                <a className="link link-hover text-xl font-h">| Terms & Conditions |</a>
 
             </nav>
             <nav>

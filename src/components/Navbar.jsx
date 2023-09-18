@@ -1,7 +1,26 @@
+import { useState, useEffect } from "react";
 import StyleSpan from "./StyleSpan";
+import { Link, useLocation } from "react-router-dom";
 
 /* eslint-disable */
 export default function Navbar() {
+    const [form, setForm] = useState('login');
+    const location = useLocation();
+    
+    useEffect(() => {
+        if (location.pathname !== '/login' && location.pathname !== '/signup') {
+            setForm('login');
+        }
+    }, [location]);
+
+    const toggleForm = () => {
+        if (form === 'login')
+            setForm('signup')
+        else
+            setForm('login')
+    }
+
+
     return (
         <div className="navbar bg-base-100 rounded">
             <div className="navbar-start">
@@ -25,7 +44,7 @@ export default function Navbar() {
 
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-2xl font-h-b rounded hover:bg-transparent"> MERN<StyleSpan>Ecommerce</StyleSpan> </a>
+                <Link to='/' className="btn btn-ghost normal-case text-2xl font-h-b flex flex-wrap rounded hover:bg-transparent">MERN<StyleSpan>Ecommerce</StyleSpan> </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -47,7 +66,8 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn rounded">Login</a>
+                {form === 'login' && <Link onClick={toggleForm} className="btn rounded" to='/login'>Login</Link>}
+                {form === 'signup' && <Link onClick={toggleForm} className="btn rounded" to='/signup'>Signup</Link>}       
             </div>
         </div>
     )

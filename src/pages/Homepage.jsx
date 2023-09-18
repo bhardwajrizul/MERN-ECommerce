@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar"
 import Panel from "../components/Panel"
 import Carousel from "../components/Carousel"
 import Card from "../components/Card"
@@ -7,9 +6,9 @@ import Feature from "../components/Feature"
 import StyleSpan from "../components/StyleSpan"
 import IconMap from "../components/IconMap"
 import Review from "../components/Review"
-import Footer from "../components/Footer"
 
 import { AiOutlineArrowRight } from 'react-icons/ai'
+
 
 /* eslint-disable */
 export default function Homepage({ cardData, features }) {
@@ -23,9 +22,8 @@ export default function Homepage({ cardData, features }) {
     })
 
     return (
-        <div className="mx-3">
-            {/* NAVBAR */}
-            <Navbar />
+        <div>
+            
             {/* Carousel */}
             <Panel className='h-[35rem] overflow-hidden rounded'>
                 <Carousel />
@@ -57,10 +55,7 @@ export default function Homepage({ cardData, features }) {
                 <Review />
             </Panel>
 
-            {/* Footer */}
-            <Panel>
-                <Footer />
-            </Panel>
+            
         </div>
     )
 }
