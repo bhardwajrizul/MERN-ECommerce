@@ -41,15 +41,16 @@ const Review = () => {
             {/* Flex Container */}
             <Panel className="flex md:flex-row flex-col justify-center items-center text-center">
                 {/* Panel1 */}
-                <Panel className="text-center mb-8 flex flex-col justify-center items-center">
+                <Panel className="md:border-r-4 py-16 text-center mb-8 flex flex-col justify-center items-center">
 
                     <h1 className="text-4xl font-h w-96 mt-4">
                         Read these testimonials from our delighted <StyleSpan>customers!</StyleSpan>
                     </h1>
+                    <Button dark className='btn rounded mt-10 px-12 font-h-b text-lg'>Share your review!</Button>
                 </Panel>
 
                 {/* Review Card */}
-                <div className="card w-full bg-white mr-4 ">
+                <div className="card w-full bg-white mr-4">
                     {/* Review Content */}
                     <article className="flex flex-col justify-center items-center text-center bg-white p-6 rounded transition">
                         <div className="relative">

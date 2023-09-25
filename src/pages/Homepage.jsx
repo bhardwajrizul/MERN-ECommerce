@@ -49,7 +49,7 @@ export default function Homepage({ cardData, features }) {
 
             {/* Reviews */}
             <Panel className='border pt-8'>
-                <h1 className="text-4xl font-h-b text-center pt-8">
+                <h1 className="text-4xl font-h-b text-center pt-8 mb-8">
                     <StyleSpan>Don't</StyleSpan> just trust us!
                 </h1>
                 <Review />
