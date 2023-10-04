@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.1.0",
     "classnames": "^2.3.2",
     "daisyui": "^3.7.3",
     "flowbite-react": "^0.6.0",

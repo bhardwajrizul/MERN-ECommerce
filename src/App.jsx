@@ -12,6 +12,7 @@ import Panel from './components/Panel';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ProductsPage from './pages/ProductsPage'
 
 
 import cardData from "./utils/cardData"
@@ -28,6 +29,7 @@ function App() {
           <Route path='/' element={<Homepage cardData={cardData} features={features} />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
+          <Route path='/products' element={<ProductsPage />} />
         </Routes>
         {/* FOOTER */}
         <Panel>
