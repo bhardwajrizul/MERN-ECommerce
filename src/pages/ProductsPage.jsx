@@ -13,6 +13,20 @@ import {
     resetAll
 } from '../store'
 
+const NoProducts = () => {
+    return (
+        <div className="alert flex flex-col gap-6 col-span-full p-20">
+            <div className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-10 w-10" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <span className="font-t-b text-3xl ml-4">No Match Found!</span>
+            </div>
+            <div className="text-t-b text-xl text-lime">
+                Try chaning your filters.
+            </div>
+        </div>
+    )
+}
+
 export default function ProductsPage() {
 
 
@@ -58,9 +72,9 @@ export default function ProductsPage() {
 
     let content;
     if (isLoading) {
-        content = <Skeleton times={6} className='h-96 sm:w-96 w-36 mx-2 my-6' />
+        content = <Skeleton times={6} className='h-96 sm:w-[90%] w-36 mx-2 my-6 px-4' />
     } else if (error) {
-        console.log(error)
+        console.error(error)
         content = <h1 className="mx-auto my-10 px-6 py-4 rounded bg-red-400">{`Something Went Wrong!`}</h1>
     } else {
         const renderedProducts = products.map((product) => {
@@ -78,7 +92,9 @@ export default function ProductsPage() {
                 brand={product.brand}
             />
         })
-        content = renderedProducts;
+        content = renderedProducts.length > 0
+            ? renderedProducts
+            : !isLoading && !isFetching && <NoProducts />
     }
     return (
 
