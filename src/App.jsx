@@ -17,8 +17,16 @@ import ProductsPage from './pages/ProductsPage'
 
 import cardData from "./utils/cardData"
 import features from "./utils/featuresData"
+import { useSelector } from 'react-redux';
 
 function App() {
+
+  const {filterCount} = useSelector((state) => {
+    return {
+      filterCount: state.filters.countFiltersApplied
+    }
+  })
+  console.log(filterCount);
   return (
     <Router>
       <div className='mx-3'> 

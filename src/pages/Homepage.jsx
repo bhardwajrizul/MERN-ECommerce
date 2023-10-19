@@ -1,11 +1,11 @@
 import Panel from "../components/Panel"
 import Carousel from "../components/Carousel"
-import Card from "../components/Card"
+import Card from "../components/Homepage/Card"
 import Button from "../components/Button"
-import Feature from "../components/Feature"
+import Feature from "../components/Homepage/Feature"
 import StyleSpan from "../components/StyleSpan"
 import IconMap from "../components/IconMap"
-import Review from "../components/Review"
+import Review from "../components/Homepage/Review"
 
 import { AiOutlineArrowRight } from 'react-icons/ai'
 
@@ -25,7 +25,7 @@ export default function Homepage({ cardData, features }) {
         <div>
             
             {/* Carousel */}
-            <Panel className='h-[35rem] overflow-hidden rounded'>
+            <Panel className='h-[35rem] bg-base-100 overflow-hidden rounded'>
                 <Carousel />
             </Panel>
             {/* TRENDING */}

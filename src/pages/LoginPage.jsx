@@ -1,6 +1,6 @@
 import Panel from "../components/Panel"
 import StyleSpan from "../components/StyleSpan"
-import Button from "../components/Button"
+import {FiLogIn} from 'react-icons/fi'
 
 export default function LoginPage() {
     return (
@@ -16,7 +16,10 @@ export default function LoginPage() {
                     <label className="font-t text-md" htmlFor="password">Password
                         <input placeholder="********" type="password" name="Password" id="1" className="border border-black block rounded-md w-full px-3 py-2" />
                     </label>
-                    <button dark onClick={e => e.preventDefault()} className="btn rounded mt-10">LOGIN</button>
+                    <button dark onClick={e => e.preventDefault()} className="btn rounded mt-10">
+                        LOGIN
+                        <FiLogIn className="text-xl" />
+                    </button>
                 </form>
             </Panel>
         </Panel>

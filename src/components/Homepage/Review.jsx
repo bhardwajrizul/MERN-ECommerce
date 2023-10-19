@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { FaQuoteRight } from 'react-icons/fa';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 
-import Panel from './Panel';
-import StyleSpan from './StyleSpan';
+import Panel from '../Panel';
+import StyleSpan from '../StyleSpan';
 
-import people from '../utils/testimonial';
-import Button from './Button';
+import people from '../../utils/testimonial';
+import Button from '../Button';
 
 const Review = () => {
     const [index, setIndex] = useState(0);

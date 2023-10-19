@@ -1,5 +1,7 @@
 import Panel from "../components/Panel"
 import StyleSpan from "../components/StyleSpan"
+import {FiLogIn} from 'react-icons/fi'
+
 
 const input = `border border-black rounded-md block px-3 py-2 w-full `
 
@@ -20,7 +22,10 @@ export default function SignupPage() {
                     <label className="font-t text-md" htmlFor="password">Password
                         <input placeholder="********" type="password" className={input}/>
                     </label>
-                    <button onClick={e => e.preventDefault()} className="btn rounded mt-10  ">SIGNUP</button>
+                    <button onClick={e => e.preventDefault()} className="btn rounded mt-10  ">
+                        SIGNUP
+                        <FiLogIn className="text-xl" />
+                    </button>
                 </form>
             </Panel>
         </Panel>

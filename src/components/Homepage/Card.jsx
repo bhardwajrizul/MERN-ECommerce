@@ -1,5 +1,5 @@
 /*eslint-disable */
-import Button from "./Button";
+import Button from "../Button";
 
 export default function Card({ title, desc, image }) {
   return (

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import StyleSpan from "./StyleSpan";
 import { Link, useLocation } from "react-router-dom";
+import {FaUserCircle} from 'react-icons/fa'
+
 
 /* eslint-disable */
 export default function Navbar() {
@@ -22,7 +24,7 @@ export default function Navbar() {
 
 
     return (
-        <div className="navbar bg-base-100 rounded">
+        <div className="navbar bg-base-100 rounded mb-6">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -66,8 +68,8 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-                {form === 'login' && <Link onClick={toggleForm} className="btn rounded" to='/login'>Login</Link>}
-                {form === 'signup' && <Link onClick={toggleForm} className="btn rounded" to='/signup'>Signup</Link>}       
+                {form === 'login' && <Link onClick={toggleForm} className="btn rounded" to='/login'>Login <FaUserCircle className="text-xl mb-[2px]" /> </Link>}
+                {form === 'signup' && <Link onClick={toggleForm} className="btn rounded" to='/signup'>Signup <FaUserCircle className="text-xl mb-[2px]" /> </Link>}       
             </div>
         </div>
     )
