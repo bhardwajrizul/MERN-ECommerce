@@ -26,10 +26,12 @@ function CategoryFilter() {
     const handleResetCategories = () => dispatch(resetCategories())
 
     return (
-        <details className="collapse bg-white border flex flex-col">
+        <details className={`collapse border flex flex-col bg-white`}>
             <summary onClick={() => setIsOpen((prev) => !prev)} className="collapse-title px-2">
                 <div className="flex flex-row text-2xl font-h-b items-center justify-between">
-                    Category
+                    <div className={`text-2xl ${filterApplied ? 'font-h-b' : 'font-h'}`}>
+                        Category
+                    </div>
                     {open ? <BsChevronDown className="text-sm text-bold" /> : <BsChevronLeft className="text-sm text-bold" />}
                 </div>
             </summary>

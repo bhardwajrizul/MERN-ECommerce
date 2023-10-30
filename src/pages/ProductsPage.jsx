@@ -98,8 +98,8 @@ export default function ProductsPage() {
     }
     return (
 
-        <Panel className='flex flex-row bg-base-100'>
-            <Panel className="w-1/3 relative bg-base-100">
+        <Panel className='flex flex-row bg-base-100 mt-4'>
+            <Panel className="w-3/12 relative bg-base-100">
                 <FilterContainer />
             </Panel>
             <Panel className='bg-base-100 pb-12 flex flex-col items-center'>

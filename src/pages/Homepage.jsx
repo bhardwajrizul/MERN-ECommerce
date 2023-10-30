@@ -7,6 +7,8 @@ import StyleSpan from "../components/StyleSpan"
 import IconMap from "../components/IconMap"
 import Review from "../components/Homepage/Review"
 
+import { Link } from "react-router-dom"
+
 import { AiOutlineArrowRight } from 'react-icons/ai'
 
 
@@ -23,7 +25,7 @@ export default function Homepage({ cardData, features }) {
 
     return (
         <div>
-            
+
             {/* Carousel */}
             <Panel className='h-[35rem] bg-base-100 overflow-hidden rounded'>
                 <Carousel />
@@ -33,7 +35,9 @@ export default function Homepage({ cardData, features }) {
                 <h1 className="text-center text-4xl text-black font-h-b mt-8 mb-8">Know what's <StyleSpan>trending!</StyleSpan></h1>
                 <Panel className="grid justify-center items-center  md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 auto-cols-auto auto-rows-auto">
                     {renderedCards}
-                    <Button dark className="justify-self-center w-48">Show More <AiOutlineArrowRight /> </Button>
+                    <Link className="justify-self-center" to='/products'>
+                        <Button dark className="justify-self-center w-48">Show More <AiOutlineArrowRight /> </Button>
+                    </Link>
                 </Panel>
             </Panel>
 
@@ -55,7 +59,7 @@ export default function Homepage({ cardData, features }) {
                 <Review />
             </Panel>
 
-            
+
         </div>
     )
 }

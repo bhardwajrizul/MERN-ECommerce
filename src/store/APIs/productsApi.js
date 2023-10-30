@@ -15,7 +15,7 @@ const productsApi = createApi({
         fetchFn: async (...args) => {
             // await delay(500); // DEV
             return fetch(...args)
-        } 
+        }
     }),
     endpoints(builder) {
         return {

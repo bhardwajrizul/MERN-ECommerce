@@ -124,4 +124,4 @@ export const {
 } = filtersSlice.actions;
 
 export { MAX_PRICE, MIN_PRICE, STEP };
-export const filtersReducer = filtersSlice.reducer;
+export default filtersSlice.reducer;

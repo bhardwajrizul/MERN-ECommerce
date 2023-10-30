@@ -7,8 +7,7 @@ import {
     showMoreProducts,
     resetProductsAndPage
 } from "./Slice/productsSlice";
-import {
-    filtersReducer,
+import filtersReducer, {
     setMaxPrice,
     setMinPrice,
     setSelectedCategories,
@@ -23,12 +22,29 @@ import {
     resetAll,
 
 } from './Slice/filtersSlice';
+import formReducer, { 
+    setName,
+    setEmail,
+    setPassword,
+    setConfirmPassword,
+    resetForm
+} from "./Slice/formSlice";
+
+import userReducer, {
+    setUser,
+    resetUser,
+    setUserLoading
+} from './Slice/userSlice'
+import { usersApi } from "./APIs/usersApi";
 
 const store = configureStore({
     reducer: {
         [productsApi.reducerPath]: productsApi.reducer,
+        [usersApi.reducerPath]: usersApi.reducer,
         products: productsReducer,
         filters : filtersReducer,
+        form: formReducer,
+        user: userReducer
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(productsApi.middleware)
@@ -53,9 +69,21 @@ export {
     resetGender,
     resetRating,
     resetCategories,
-    resetAll
+    resetAll,
+    setName,
+    setEmail,
+    setPassword,
+    setConfirmPassword,
+    setUser,
+    resetUser,
+    setUserLoading,
+    resetForm
 }
 export {
     useFetchProductsQuery,
     useFetchFilteredProductsQuery
 } from './APIs/productsApi'
+
+export {
+    useAddUserMutation 
+} from './APIs/usersApi'

@@ -26,7 +26,9 @@ function RatingFilter() {
         <details className="collapse bg-white border flex flex-col py-4">
             <summary onClick={() => setIsOpen(prev => !prev)} className="px-2">
                 <div className="flex flex-row text-2xl font-h-b items-center justify-between">
-                    Min Rating
+                    <div className={`text-2xl ${filterApplied ? 'font-h-b' : 'font-h'}`}>
+                        Min Rating
+                    </div>
                     {open ? <BsChevronDown className="text-sm text-bold" /> : <BsChevronLeft className="text-sm text-bold" />}
                 </div>
             </summary>

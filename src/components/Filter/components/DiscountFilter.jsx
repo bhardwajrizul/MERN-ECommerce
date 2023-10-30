@@ -26,7 +26,9 @@ function DiscountFilter() {
         <details className="collapse bg-white border flex flex-col ">
             <summary onClick={() => setIsOpen((prev) => !prev)} className="collapse-title px-2">
                 <div className="flex flex-row text-2xl font-h-b items-center justify-between">
-                    Discount Amount
+                    <div className={`text-2xl ${filterApplied ? 'font-h-b' : 'font-h'}`}>
+                        Discount Amount
+                    </div>
                     {open ? <BsChevronDown className="text-sm text-bold" /> : <BsChevronLeft className="text-sm text-bold" />}
                 </div>
             </summary>
