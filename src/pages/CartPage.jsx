@@ -87,8 +87,8 @@ export default function CartPage() {
                 "description": "Order Transaction",
                 "image": "https://vitejs.dev/logo-with-shadow.png",
                 "order_id": result.data.id, // the `id` obtained in the response of createRazorpayOrder.
-                // "callback_url": "https://<your-website>.com/path-to-redirect-after-payment",  // PROD
-                "callback_url": "http://localhost:8080/api/order/confirmOrder", // DEV
+                "callback_url": "https://mern-ecommerce-api-nzid.onrender.com/api/order/confirmOrder",  // PROD
+                // "callback_url": "http://localhost:8080/api/order/confirmOrder", // DEV
                 "prefill": {
                     "name": result.data.name,
                     "email": result.data.mail,

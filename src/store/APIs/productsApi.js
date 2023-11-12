@@ -13,7 +13,7 @@ const productsApi = createApi({
         // baseUrl: 'http://localhost:8080/api', // DEV
         baseUrl: 'https://mern-ecommerce-api-nzid.onrender.com/api', // PROD
         fetchFn: async (...args) => {
-            // await delay(0); // DEV
+            await delay(500); // DEV
             return fetch(...args)
         }
     }),
