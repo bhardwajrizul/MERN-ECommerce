@@ -23,7 +23,7 @@ function DiscountFilter() {
     const handleResetDiscount = () => dispatch(resetDiscount())
 
     return (
-        <details className="collapse bg-white border flex flex-col ">
+        <details className="collapse bg-white border flex flex-col hover:cursor-pointer">
             <summary onClick={() => setIsOpen((prev) => !prev)} className="collapse-title px-2">
                 <div className="flex flex-row text-2xl font-h-b items-center justify-between">
                     <div className={`text-2xl ${filterApplied ? 'font-h-b' : 'font-h'}`}>

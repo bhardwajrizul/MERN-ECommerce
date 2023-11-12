@@ -26,7 +26,7 @@ function CategoryFilter() {
     const handleResetCategories = () => dispatch(resetCategories())
 
     return (
-        <details className={`collapse border flex flex-col bg-white`}>
+        <details className={`collapse border flex flex-col bg-white hover:cursor-pointer`}>
             <summary onClick={() => setIsOpen((prev) => !prev)} className="collapse-title px-2">
                 <div className="flex flex-row text-2xl font-h-b items-center justify-between">
                     <div className={`text-2xl ${filterApplied ? 'font-h-b' : 'font-h'}`}>

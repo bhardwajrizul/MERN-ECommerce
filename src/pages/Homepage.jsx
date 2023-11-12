@@ -27,7 +27,7 @@ export default function Homepage({ cardData, features }) {
         <div>
 
             {/* Carousel */}
-            <Panel className='h-[35rem] bg-base-100 overflow-hidden rounded'>
+            <Panel className='h-[35rem] bg-base-200 overflow-hidden rounded'>
                 <Carousel />
             </Panel>
             {/* TRENDING */}
@@ -42,11 +42,11 @@ export default function Homepage({ cardData, features }) {
             </Panel>
 
             {/* Features */}
-            <Panel className='bg-base-100 rounded border pt-8'>
+            <Panel className='bg-base-200 rounded border pt-8'>
                 <h1 className="font-h-b pt-8 pb-4 text-4xl text-center ">
                     Our <StyleSpan>Promise!</StyleSpan>
                 </h1>
-                <Panel className=" bg-base-100 rounded pt-8 grid justify-center items-stretch  md:grid-cols-2 lg:grid-cols-3 auto-cols-auto auto-rows-auto">
+                <Panel className=" bg-base-200 rounded pt-8 grid justify-center items-stretch  md:grid-cols-2 lg:grid-cols-3 auto-cols-auto auto-rows-auto">
                     {renderedFeatures}
                 </Panel>
             </Panel>

@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
     return (
         <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
-            <nav className="grid grid-flow-col gap-4">
-                <a className="link link-hover text-xl font-h">| About us |</a>
-                <a className="link link-hover text-xl font-h">| Contact |</a>
-                <a className="link link-hover text-xl font-h">| Shop More! |</a>
-                <a className="link link-hover text-xl font-h">| Terms & Conditions |</a>
+            <nav className="grid lg:grid-flow-col gap-4">
+                <Link to={'/aboutus'} className="link link-hover text-xl font-h">| About us |</Link>
+                <Link to={'/contact'} className="link link-hover text-xl font-h">| Contact |</Link>
+                <Link to={'/products'} className="link link-hover text-xl font-h">| Shop More! |</Link>
+                <Link to={'/terms-and-conditions'} className="link link-hover text-xl font-h">| Terms & Conditions |</Link>
 
             </nav>
             <nav>
@@ -17,6 +19,12 @@ export default function Footer() {
             </nav>
             <aside>
                 <p>Copyright © 2023 - All right reserved by MERN-Ecommerce</p>
+                <p>Created by
+                    <a className="text-blue-400 mx-1 underline" target="_blank" href="https://www.linkedin.com/in/rizul/">
+                        Rizul Bhardwaj
+                    </a>
+                </p>
+
             </aside>
         </footer>
     )

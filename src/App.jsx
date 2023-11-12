@@ -3,8 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Link,
-  useParams
 } from 'react-router-dom';
 
 import Homepage from './pages/Homepage'
@@ -23,34 +21,59 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProfilePage from './pages/ProfilePage';
 import { useEffect, useState } from 'react';
 
+import { getAuth } from 'firebase/auth';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { resetUser, setUser, setUserLoading } from './store';
+import { resetUser, setToken, setUser, setUserLoading } from './store';
+import ProductInfoPage from './pages/ProductInfoPage';
+import WishlistPage from './pages/WishlistPage';
+import CartPage from './pages/CartPage';
+import Payment from './pages/Payment';
+import OrdersPage from './pages/OrdersPage';
+import TooManyReq from './pages/TooManyReq';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import TermsAndConditions from './pages/Terms&Conditions';
 
 function App() {
-  const uidParam = useParams().uid;
-  const { filterCount, userLoading, userId } = useSelector((state) => {
+  const { filterCount, userLoading, userId, token } = useSelector((state) => {
     return {
       filterCount: state.filters.countFiltersApplied,
       userLoading: state.user.loading,
-      userId: state.user.userId
+      userId: state.user.userId,
+      token: state.user.token
     }
   })
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const userData = { ...user }
-        dispatch(setUser({ email: userData.email, uid: userData.uid }))
-      } else {
-        dispatch(resetUser())
-      }
-    })
-    return () => unSubscribe();
-  }, [dispatch])
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      dispatch(setUserLoading(true));
 
+      if (user) {
+        // User is signed in, handle user data.
+        // console.log(user);
+        // Get the ID token asynchronously.
+        user.getIdToken(true).then(idToken => {
+          dispatch(setUser({ email: user.email, uid: user.uid, token: idToken }));
+        }).catch(error => {
+          console.error('Error fetching ID token', error);
+          dispatch(resetUser());
+        })
+      } else {
+        // User is signed out, reset user state.
+        dispatch(resetUser());
+      }
+    });
+
+    // Cleanup function to unsubscribe from the auth state observer.
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch]);
+
+  // console.log(`USER ID : ${userId} TOKEN: ${token}`)
 
 
   // console.log(filterCount);
@@ -62,12 +85,22 @@ function App() {
         <Navbar />
         {/* ROUTES */}
         <Routes>
-
           <Route path='/' element={<Homepage cardData={cardData} features={features} />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/products' element={<ProductsPage />} />
+          <Route path='/products/:pid' element={<ProductInfoPage />} />
           <Route path='/user/:uid' element={<ProfilePage />} />
+          <Route path='/user/:uid/wishlist' element={<WishlistPage />} />
+          <Route path='/user/:uid/cart' element={<CartPage />} />
+          <Route path='/user/:uid/orders' element={<OrdersPage />} />
+          <Route path='/paymentConfirm' element={<Payment />} />
+          <Route path='/too-many-requests' element={<TooManyReq />} />
+          <Route path='/aboutus' element={<About />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
+
+
         </Routes>
         {/* FOOTER */}
         <Panel>

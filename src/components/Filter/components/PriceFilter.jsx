@@ -34,7 +34,7 @@ function PriceFilter() {
     const handleResetPrice = () => dispatch(resetPrice())
 
     return (
-        <details className="collapse bg-white border flex flex-col py-4">
+        <details className="collapse bg-white border flex flex-col py-4 hover:cursor-pointer">
             <summary onClick={() => setIsOpen(prev => !prev)} className="px-2">
                 <div className="flex flex-row text-2xl font-h-b items-center justify-between">
                     <div className={`text-2xl ${filterApplied ? 'font-h-b' : 'font-h'}`}>

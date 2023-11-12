@@ -24,11 +24,10 @@ function FilterContainer() {
     });
 
     return (
-        <Panel
-            className="w-72 sticky top-8 pb-[8rem] max-h-screen bg-base-100 rounded overflow-y-auto">
+        <Panel className="hidden lg:block w-full sm:w-64 lg:w-72 sticky top-8 pb-[8rem] max-h-screen bg-base-100 rounded overflow-y-auto">
             <Panel className='bg-base-100 shadow-sm border flex flex-col py-1 rounded-full mb-2'>
-                <h1 className="text-2xl font-h-b my-1 ml-2 text-center">
-                     Filters 
+                <h1 className="text-xl sm:text-2xl font-h-b my-1 ml-2 text-center">
+                    Filters
                 </h1>
             </Panel>
             <PriceFilter />

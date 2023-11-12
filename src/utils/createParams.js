@@ -1,4 +1,4 @@
-function createParams(page, filters) {
+function createParams(page, filters, searchQuery) {
     const params = {
         page: page,
         'price[gte]': filters.price.min,
@@ -16,6 +16,9 @@ function createParams(page, filters) {
     
     if (filters.gender) {
         params['gender'] = filters.gender.toLowerCase();
+    }
+    if (searchQuery) {
+        params['searchQuery'] = searchQuery
     }
     return params;
 }

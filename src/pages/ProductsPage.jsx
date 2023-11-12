@@ -12,13 +12,19 @@ import {
     useFetchFilteredProductsQuery,
     resetAll
 } from '../store'
+import { useSearchParams } from "react-router-dom";
+import PriceFilter from "../components/Filter/components/PriceFilter";
+import CategoryFilter from "../components/Filter/components/CategoryFilter";
+import DiscountFilter from "../components/Filter/components/DiscountFilter";
+import GenderFilter from "../components/Filter/components/GenderFilter";
+import RatingFilter from "../components/Filter/components/RatingFilter";
 
 const NoProducts = () => {
     return (
         <div className="alert flex flex-col gap-6 col-span-full p-20">
             <div className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-10 w-10" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                <span className="font-t-b text-3xl ml-4">No Match Found!</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-10 w-10 fill-pink-500" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <span className="font-h-b text-pink-700 text-4xl ml-4">No Products Found!</span>
             </div>
             <div className="text-t-b text-xl text-lime">
                 Try chaning your filters.
@@ -28,6 +34,9 @@ const NoProducts = () => {
 }
 
 export default function ProductsPage() {
+
+    const [searchParams] = useSearchParams()
+    const searchQuery = searchParams.get('query') || null
 
 
     const dispatch = useDispatch();
@@ -46,11 +55,11 @@ export default function ProductsPage() {
         error,
         isLoading,
         isFetching
-    } = useFetchFilteredProductsQuery({ page, filters })
+    } = useFetchFilteredProductsQuery({ page, filters, searchQuery })
 
     useEffect(() => {
         dispatch(resetProductsAndPage())
-    }, [filters])
+    }, [filters, searchQuery])
 
 
 
@@ -75,11 +84,17 @@ export default function ProductsPage() {
         content = <Skeleton times={6} className='h-96 sm:w-[90%] w-36 mx-2 my-6 px-4' />
     } else if (error) {
         console.error(error)
-        content = <h1 className="mx-auto my-10 px-6 py-4 rounded bg-red-400">{`Something Went Wrong!`}</h1>
+        content = (
+            <div className="flex flex-col items-start justify-start">
+                <h1 className="mx-auto my-10 px-6 py-4 rounded bg-red-400">{`Something Went Wrong!`}</h1>
+                <h1 className="mx-auto my-10 px-6 py-4 rounded bg-red-400">{`Status : ${error.originalStatus || error.status}`}</h1>
+            </div>
+        )
     } else {
         const renderedProducts = products.map((product) => {
             return <ProductCard
                 key={product._id}
+                pid={product._id}
                 name={product.name}
                 image={product.image}
                 description={product.description}
@@ -98,8 +113,18 @@ export default function ProductsPage() {
     }
     return (
 
-        <Panel className='flex flex-row bg-base-100 mt-4'>
-            <Panel className="w-3/12 relative bg-base-100">
+        <Panel className='flex lg:flex-row flex-col bg-base-100 mt-4'>
+            <Panel className="lg:w-3/12 relative bg-base-100">
+                <details className="dropdown block lg:hidden">
+                    <summary className="m-1 btn w-full">Filters</summary>
+                    <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-full">
+                        <li><PriceFilter /></li>
+                        <li><CategoryFilter /></li>
+                        <li><DiscountFilter /></li>
+                        <li><GenderFilter /></li>
+                        <li><RatingFilter /></li>
+                    </ul>
+                </details>
                 <FilterContainer />
             </Panel>
             <Panel className='bg-base-100 pb-12 flex flex-col items-center'>

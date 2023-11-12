@@ -14,6 +14,8 @@ const handleFirebaseError = (error) => {
             return 'The password is too weak. Please choose a stronger password.';
         case 'auth/invalid-login-credentials':
             return 'Invalid login credentials. Please try again.';
+        case 'auth/too-many-requests':
+            return 'Too Many Requests from this IP try again later';
         default:
             return 'An error occurred. Please try again.';
     }

@@ -12,7 +12,7 @@ export default function Feature({ title, description, Icon }) {
                     {title}
                 </h1>
             </Panel>
-            <Panel className="bg-base-100 flex font-t flex-col w-96 text-lg mt-4 text-gray-500">
+            <Panel className="bg-base-100 flex font-t flex-col lg:w-96 text-lg mt-4 text-gray-500">
                 <p className=" font-t">
                     {description}
                 </p>

@@ -13,7 +13,7 @@ const productsApi = createApi({
         // baseUrl: 'http://localhost:8080/api', // DEV
         baseUrl: 'https://mern-ecommerce-api-nzid.onrender.com/api', // PROD
         fetchFn: async (...args) => {
-            // await delay(500); // DEV
+            // await delay(0); // DEV
             return fetch(...args)
         }
     }),
@@ -31,17 +31,29 @@ const productsApi = createApi({
                 }
             }),
             fetchFilteredProducts: builder.query({
-                query: ({page, filters}) => {
+                query: ({page, filters, searchQuery=null}) => {
                     return {
                         url: '/products',
-                        params: createParams(page, filters),
+                        params: createParams(page, filters, searchQuery),
                         method: 'GET'
                     }
                 }
             }),
+            fetchProductInfo: builder.query({
+                query: (pid) => {
+                    return {
+                        url: `/products/${pid}`,
+                        method: 'GET'
+                    }
+                }
+            })
         }
     }
 })
 
 export { productsApi }
-export const {useFetchProductsQuery, useFetchFilteredProductsQuery} = productsApi
+export const {
+    useFetchProductsQuery,
+    useFetchFilteredProductsQuery,
+    useFetchProductInfoQuery
+} = productsApi

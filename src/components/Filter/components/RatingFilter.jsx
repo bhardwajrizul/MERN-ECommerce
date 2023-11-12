@@ -7,7 +7,7 @@ import Button from "../../Button";
 function RatingFilter() {
     const [open, setIsOpen] = useState(false);
     const dispatch = useDispatch()
-    const [min, max, step] = [1, 5, 1];
+    const [min, max, step] = [0, 5, 1];
     const { rating, filterApplied } = useSelector((state) => {
         return {
             rating: state.filters.rating,
@@ -23,7 +23,7 @@ function RatingFilter() {
     const handleResetRating = () => dispatch(resetRating())
 
     return (
-        <details className="collapse bg-white border flex flex-col py-4">
+        <details className="collapse bg-white border flex flex-col py-4 hover:cursor-pointer">
             <summary onClick={() => setIsOpen(prev => !prev)} className="px-2">
                 <div className="flex flex-row text-2xl font-h-b items-center justify-between">
                     <div className={`text-2xl ${filterApplied ? 'font-h-b' : 'font-h'}`}>
@@ -46,12 +46,21 @@ function RatingFilter() {
                                 onChange={handleRatingChange}
                             />
                             <div className="flex flex-row items-center justify-start">
-                                <h1 className="font-t-b text-sm p-2">Rating : </h1>
+                                <h1 className="font-t-b text-lg p-2">Rating : </h1>
                                 <h1 className="font-t text-md flex flex-row items-center justify-center">
-                                    <div className="mt-1 text-xl">
-                                        {rating === max ? rating : `${rating}+`}
+                                    <div className="mt-1 mb-0.5 text-xl font-t">
+                                        {
+                                            rating === max
+                                                ? rating
+                                                : rating === min
+                                                    ? `Any`
+                                                    : `${rating}+`
+                                        }
                                     </div>
-                                    <CiStar className="text-2xl" />
+                                    {
+                                        rating != min &&
+                                        <CiStar className="text-2xl" />
+                                    }
 
                                 </h1>
                             </div>

@@ -27,7 +27,7 @@ const filtersSlice = createSlice({
         selectedCategories: [],
         discount: 0,
         gender: '',
-        rating: 1,
+        rating: 0,
         countFiltersApplied: {
             ...filtersApplied
         }
@@ -84,10 +84,10 @@ const filtersSlice = createSlice({
         },
         setRating(state, action) {
             state.rating = action.payload;
-            state.countFiltersApplied.rating = true
+            state.countFiltersApplied.rating = state.rating == 0 ? false : true
         },
         resetRating(state, action) {
-            state.rating = 1
+            state.rating = 0
             state.countFiltersApplied.rating = false
         },
         resetCategories(state, action) {
@@ -97,7 +97,7 @@ const filtersSlice = createSlice({
         resetAll(state, action) {
             state.discount = 0
             state.gender = ''
-            state.rating = 1
+            state.rating = 0
             state.price.min = MIN_PRICE
             state.price.max = MAX_PRICE
             state.selectedCategories = []

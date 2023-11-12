@@ -1,15 +1,20 @@
 import { useSelector } from "react-redux";
 import Panel from "../components/Panel";
 import Label from "../components/User/components/Label";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import StyleSpan from "../components/StyleSpan";
 import UserAvatar from "../components/User/components/Avatar";
+import UserAddress from "../components/User/components/UserAddress";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import { getAuth } from "firebase/auth";
 import Button from "../components/Button";
 import Modal from "../components/User/components/Modal";
 import ModalAddress from "../components/User/components/ModalAddress";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGetUserQuery, useUpdateUserDataMutation } from "../store";
+import UserData from "../components/User/components/UserData";
+import Skeleton from "../components/Skeleton";
 
 function ProfilePage() {
     const [logOutLoading, setLogOutLoading] = useState(false)
@@ -17,13 +22,27 @@ function ProfilePage() {
     const uidParam = useParams().uid
 
 
-    const { userId, loading, userEmail } = useSelector((state) => {
+    const { userId, loading, token } = useSelector((state) => {
         return {
             userId: state.user.userId,
-            userEmail: state.user.userEmail,
-            loading: state.user.loading
+            loading: state.user.loading,
+            token: state.user.token,
         }
     })
+
+    const {
+        data,
+        error,
+        isLoading,
+        isFetching
+    } = useGetUserQuery(
+        { uid: uidParam, token: token },
+        {
+            skip: !userId || !token
+        }
+    );
+
+    const [updateUser] = useUpdateUserDataMutation();
 
     const handleLogOut = (e) => {
         e.preventDefault()
@@ -31,61 +50,59 @@ function ProfilePage() {
         signOut(auth)
             .then(() => {
                 // Sign-out successful.
-                setLogOutLoading(false)
                 navigate('/login')
+                setLogOutLoading(false)
             })
             .catch((error) => {
                 // An error happened.
                 console.error("Error signing out:", error);
             });
     }
-
     let content;
-    console.log(userId, uidParam)
-
-    if (loading) {
-        content = <span className="loading loading-spinner text-error loading-lg"></span>
-    } else if (!loading && userId && userId === uidParam) {
+    if (error) {
+        console.error(error)
         content = (
-            <div className="flex flex-row bg-base-100 px-10 py-8 mx-10 rounded-lg w-full">
-                <div>
+            <div className="flex flex-col items-start justify-start">
+                <h1 className="mx-auto my-10 px-6 py-4 rounded bg-red-400">{`Something Went Wrong!`}</h1>
+                <h1 className="mx-auto my-10 px-6 py-4 rounded bg-red-400">{`Status : ${error.originalStatus}`}</h1>
+            </div>
+        )
+    } 
+    else if (!loading && !isLoading && !isFetching && userId === uidParam && token && data) {
+        content = (
+            <div className="flex flex-row flex-wrap bg-base-100 px-10 py-8 mx-10 rounded-lg w-full">
+                <div className="lg:w-1/3">
                     <UserAvatar />
                 </div>
-                <div className="flex flex-col">
-                    <div className="flex flex-row flex-wrap items-start justify-center content-start bg-white ml-10 my-4 p-4">
-                        <Label title='Name'>
-                            <span className="font-t text-sm text-gray-700">{`Rizul Bhardwaj`}</span>
-                        </Label>
-                        <Label title='Email'>
-                            <span className="font-t text-sm text-gray-700">{userEmail}</span>
-                        </Label>
-                        <Label title='Userid'>
-                            <span className="font-t text-sm text-gray-700">{userId}</span>
-                        </Label>
-                        <Label title='Phone'>
-                            <span className="font-t text-sm text-gray-700">{`${'Not Provided'}`}</span>
-                        </Label>
-                        <Label classname='flex-col pb-4 w-full h-72 overflow-hidden overflow-y-scroll' contentClass='flex flex-col w-full' title='Address'>
-                            <div className="flex flex-row justify-center items-center w-full mb-4">
-                                <label className="font-t-b mr-10" htmlFor="">Address 1</label>
-                                <div className="font-t text-sm text-gray-700 w-96 h-24 bg-base-300 mx-2 text-center p-2">{`${'Not Provided'}`}</div>
-                            </div>
-                            <div className="flex flex-row justify-center items-center w-full mb-4">
-                                <label className="font-t-b mr-10" htmlFor="">Address 2</label>
-                                <div className="font-t text-sm text-gray-700 w-96 h-24 bg-base-300 mx-2 text-center p-2">{`${'Not Provided'}`}</div>
-                            </div>
-                            <div className="flex flex-row justify-center items-center w-full mb-4">
-                                <label className="font-t-b mr-10" htmlFor="">Address 3</label>
-                                <div className="font-t text-sm text-gray-700 w-96 h-24 bg-base-300 mx-2 text-center p-2">{`${'Not Provided'}`}</div>
-                            </div>
-                        </Label>
+                <div className="flex flex-col w-full lg:w-2/3">
+                    <div className="flex flex-row flex-wrap items-start justify-center content-start bg-white lg:ml-10 lg:my-4 p-4">
+                        <UserData
+                            userName={data?.name || "Not Provided"}
+                            userEmail={data?.email || "Not Provided"}
+                            userId={data?.firebaseUID || "Not Provided"}
+                            userAddress={data?.address || "Not Provided"}
+                            userPhone={data?.phoneNumber || "Not Provided"}
+                        />
                     </div>
                     <div className="items-center justify-center flex flex-row flex-wrap">
-                        <button className="mr-3 btn rounded btn-dark" onClick={() => document.getElementById('my_modal_2').showModal()}>Update Details</button>
-                        <Modal />
-                        <button className="mr-3 btn rounded btn-dark" onClick={() => document.getElementById('my_modal_3').showModal()}>Add Address</button>
-                        <ModalAddress />
-                        <button className='mr-3 btn rounded btn-dark'>Show Orders</button>
+                        <button className="mr-3 my-1 btn rounded btn-dark update-details" onClick={() => document.getElementById('my_modal_user_details').showModal()}>Update Details</button>
+                        <Modal
+                            userName={data?.name}
+                            userPhone={data?.phoneNumber}
+                            updateUser={updateUser}
+                            token={token}
+                            uidParam={uidParam}
+                        />
+                        <button className="mr-3 my-1 btn rounded btn-dark update-address" onClick={() => document.getElementById('my_modal_address').showModal()}>Update Address</button>
+                        <ModalAddress
+                            userAddress={data?.address}
+                            token={token}
+                            uidParam={uidParam}
+                            updateUser={updateUser}
+                        />
+                        <Link to={`/user/${userId}/orders`}>
+                            <button className='mr-3 my-1 btn rounded btn-dark'>Show Orders</button>
+                        </Link>
                     </div>
                 </div>
 
@@ -100,16 +117,32 @@ function ProfilePage() {
             </h1>
             <div className="flex flex-row flex-wrap mt-10 justify-center w-full">
                 <div className="w-full flex items-center justify-center">
-                    {content}
+                    {
+                        isFetching && <Skeleton times={1} className='w-full mx-14 h-96' />
+                    }
+                    {!isFetching && content}
                 </div>
             </div>
-            <button onClick={handleLogOut} className="btn btn-rounded text-center mt-10">
-                {
-                    logOutLoading
-                        ? <span className="loading loading-spinner text-error mx-auto mt-4"></span>
-                        : `Logout`
-                }
-            </button>
+            {
+                data && !isFetching &&
+                <button onClick={handleLogOut} className="btn btn-rounded text-center mt-10">
+                    {
+                        logOutLoading
+                            ? <span className="loading loading-spinner text-error mx-auto mt-4"></span>
+                            : `Logout`
+                    }
+                </button>
+            }
+            {
+                !userId &&
+                !token &&
+                <div className="alert alert-error p-10 mb-10 w-96 flex flex-col">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-20 w-20" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                    <span className="font-t-b text-2xl text-gray-800">You are not logged in!</span>
+                    <span className="font-t text-xl text-white">Login to Manage your profile!</span>
+
+                </div>
+            }
         </Panel>
     )
 }

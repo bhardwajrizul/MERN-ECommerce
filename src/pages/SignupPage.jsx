@@ -18,27 +18,32 @@ const input = `border border-black rounded-md block px-3 py-2 w-full `
 export default function SignupPage() {
     const [loading, setLoading] = useState(false)
     const [err, setErr] = useState('');
+    const [userCreated, setUserCreated] = useState(false);
+
     const navigate = useNavigate()
     const uidParam = useParams().uid;
     const [addUser] = useAddUserMutation();
 
-    const { userName, email, password, confirmPassword, userId } = useSelector((state) => {
+    const { userName, email, password, confirmPassword, userId, token } = useSelector((state) => {
         return {
             userName: state.form.name,
             email: state.form.email,
             password: state.form.password,
             confirmPassword: state.form.confirmPassword,
-            userId: state.user.userId
+            userId: state.user.userId,
+            token: state.user.token
         }
     })
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (userId) {
-            navigate(`/user/${userId}`)
+        // onAuthStateChanged will update userId and token state
+        // Redirect only after userId and token state are updated
+        if (userId && token && !loading) {
+            navigate(`/user/${userId}`);
         }
-    }, [userId])
+    }, [userId, token, loading])
 
 
     const handleNameChange = (e) => {
@@ -55,52 +60,55 @@ export default function SignupPage() {
     }
 
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
         setErr('');
         let error = validator('signup', { userName, email, password, confirmPassword });
+
         if (error?.message) {
             setErr(error.message);
             return;
         }
+
         setLoading(true);
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                return getAuth().currentUser.getIdToken(/* forceRefresh */ true)
-                    .then(idToken => ({ idToken, user }));
-            })
-            .then(({ idToken, user }) => {
-                dispatch(resetForm());
-                // Now you have access to both the idToken and user object
-                return addUser({
-                    uid: user.uid,
-                    email: user.email,
-                    name: userName,
-                    token: idToken
-                });
-            })
-            .then(({ data, error }) => {
-                if (error) throw error;
-                // handle success, if needed
-                console.error('Unexpected Error!')
-            })
-            .catch((error) => {
-                // Unified error handling
-                const friendlyError = handleFirebaseError(error);
-                setErr(friendlyError);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        try {
+            // Create user with Firebase Auth
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Get a fresh ID token
+            const idToken = await user.getIdToken(true); // true to force refresh
+
+            // onAuthStateChanged event listener will set state userId and token
+            // We can listen to these tokens in useEffect to navigate
+            // addUser will add these to databse and data for it is coming from
+            // createUserWithEmailAndPassword function so it independent of state varibales
+            const addUserResult = await addUser({
+                uid: user.uid,
+                email: user.email,
+                name: userName,
+                token: idToken
+            }).unwrap();
+
+            if (!addUserResult.success) {
+                setErr('Failed to create user profile. Contact admin!');
+            }
+            dispatch(resetForm())
+        } catch (error) {
+            // Unified error handling
+            const friendlyError = handleFirebaseError(error);
+            setErr(friendlyError);
+        } finally {
+            setLoading(false);
+        }
     };
 
 
 
     return (
         <Panel className="flex justify-center bg-base-100 my-6">
-            <Panel className="flex flex-col w-1/3 px-10 py-20 rounded-lg shadow-2xl my-4">
+            <Panel className="flex flex-col lg:w-1/3 px-10 py-20 rounded-lg shadow-2xl my-4">
                 <h1 className='flex flex-row text-4xl font-h-b text-center items-center justify-center'>
                     <StyleSpan>Signup</StyleSpan>&nbsp;for an account
                 </h1>

@@ -63,3 +63,6 @@
 }
 
 
+summary::after {
+  visibility: hidden;
+}

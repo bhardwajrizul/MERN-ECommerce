@@ -1,6 +1,9 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { productsApi } from "./APIs/productsApi";
+import { usersApi } from "./APIs/usersApi";
+import { ordersApi } from "./APIs/ordersApi";
+
 import {
     productsReducer,
     pushNewProductsToPage,
@@ -22,7 +25,7 @@ import filtersReducer, {
     resetAll,
 
 } from './Slice/filtersSlice';
-import formReducer, { 
+import formReducer, {
     setName,
     setEmail,
     setPassword,
@@ -33,29 +36,40 @@ import formReducer, {
 import userReducer, {
     setUser,
     resetUser,
-    setUserLoading
+    setUserLoading,
+    setToken
 } from './Slice/userSlice'
-import { usersApi } from "./APIs/usersApi";
+
+import productInfoReducer, {
+    setProductInfo,
+    updateProductInfo,
+    resetProductInfo
+} from "./Slice/productInfoSlice";
 
 const store = configureStore({
     reducer: {
         [productsApi.reducerPath]: productsApi.reducer,
         [usersApi.reducerPath]: usersApi.reducer,
+        [ordersApi.reducerPath]: ordersApi.reducer,
         products: productsReducer,
-        filters : filtersReducer,
+        productInfo: productInfoReducer,
+        filters: filtersReducer,
         form: formReducer,
         user: userReducer
     },
     middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware().concat(productsApi.middleware)
+        return getDefaultMiddleware()
+            .concat(productsApi.middleware)
+            .concat(usersApi.middleware)
+            .concat(ordersApi.middleware)
     }
 })
 
 setupListeners(store.dispatch);
 
-export { 
+export {
     store,
-    pushNewProductsToPage ,
+    pushNewProductsToPage,
     showMoreProducts,
     resetProductsAndPage,
     setMaxPrice,
@@ -76,14 +90,33 @@ export {
     setConfirmPassword,
     setUser,
     resetUser,
+    setToken,
     setUserLoading,
-    resetForm
+    resetForm,
+    setProductInfo,
+    updateProductInfo,
+    resetProductInfo,
 }
 export {
     useFetchProductsQuery,
-    useFetchFilteredProductsQuery
+    useFetchFilteredProductsQuery,
+    useFetchProductInfoQuery
 } from './APIs/productsApi'
 
 export {
-    useAddUserMutation 
+    useAddUserMutation,
+    useGetUserQuery,
+    useUpdateUserDataMutation,
+    useAddToWishListMutation,
+    useGetWishlistItemsQuery,
+    useRemoveItemFromWishListMutation,
+    useGetCartItemsQuery,
+    useRemoveItemFromCartMutation,
+    useAddToCartMutation,
+    useGetOrdersQuery
 } from './APIs/usersApi'
+
+export {
+    usePlaceOrderMutation,
+    useConfirmPaymentQuery
+} from './APIs/ordersApi'

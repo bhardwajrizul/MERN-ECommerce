@@ -1,6 +1,7 @@
 import Skeleton from '../Skeleton'
 import { useState } from 'react'
 import { CiStar } from 'react-icons/ci'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 export default function ProductCard({
@@ -12,14 +13,15 @@ export default function ProductCard({
     discountPercent,
     rating,
     ratingCount,
-    gender,
-    brand
+    brand,
+    pid
 }) {
     const [imageLoaded, setImageLoaded] = useState(false)
+    const navigate = useNavigate();
     return (
-        <div className="card bg-white shadow-xl mx-2 mb-6">
+        <div onClick={() => navigate(`/products/${pid}`)} className="card hover:cursor-pointer hover:bg-base-100 bg-white shadow-xl mx-2 mb-6">
             <figure className="bg-cover p-2 relative">
-                {!imageLoaded && <Skeleton times={1} className='w-full h-96' />}
+                {!imageLoaded && <Skeleton times={1} className='w-full h-80' />}
                 <img
                     className={`w-full h-full rounded-lg border-2 border ${imageLoaded ? '' : 'hidden'}`}
                     src={image}

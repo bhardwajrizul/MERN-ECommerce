@@ -14,26 +14,29 @@ import { useNavigate, useParams } from "react-router-dom"
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false)
+    // const [showLoginBtn, setShowLoginBtn] = useState(true)
     const [err, setErr] = useState('');
 
     const naviagte = useNavigate()
-    const uidParam = useParams().uid;
 
-    const { email, password, userId } = useSelector((state) => {
+    const { email, password, userId, token } = useSelector((state) => {
         return {
             email: state.form.email,
             password: state.form.password,
-            userId: state.user.userId
+            userId: state.user.userId,
+            token: state.user.token
         }
     })
     const dispatch = useDispatch()
 
+    // onAuthStateChanged will update userId and token state 
+    // when signInWithEmailAndPassword is called
     useEffect(() => {
-        if (userId) {
+        if (userId && token && !loading) {
             naviagte(`/user/${userId}`)
         }
-    }, [userId])
- 
+    }, [userId, token, loading])
+
 
     const handleEmailChange = (e) => {
         dispatch(setEmail(e.target.value))
@@ -50,22 +53,25 @@ export default function LoginPage() {
             setErr(error.message)
             return;
         }
-        setLoading(true)
 
+        setLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                setLoading(false)
+                // onAuthStateChanged event will update state of userId and token
+                // using useEffect we naviagte to profile when state is updated
                 dispatch(resetForm())
             })
             .catch((error) => {
                 const friendlyError = handleFirebaseError(error)
                 setErr(friendlyError)
+            })
+            .finally(() => {
                 setLoading(false)
-            });
+            })
     }
     return (
         <Panel className="flex justify-center my-4 bg-base-100">
-            <Panel className="flex flex-col w-1/3 px-10 py-20 rounded-lg shadow-2xl my-4">
+            <Panel className="flex flex-col lg:w-1/3 px-10 py-20 rounded-lg shadow-2xl my-4">
                 <h1 className='flex flex-row text-4xl font-h-b text-center items-center justify-center'>
                     <StyleSpan>Login</StyleSpan>&nbsp;to your account
                 </h1>
@@ -76,7 +82,7 @@ export default function LoginPage() {
                     <label className="font-t text-md" htmlFor="password">Password
                         <input placeholder="********" type="password" name="Password" id="1" value={password} onChange={handlePasswordChange} className="border border-black block rounded-md w-full px-3 py-2" />
                     </label>
-                    {   err && 
+                    {err &&
                         <label className="font-t text-md text-red-500">
                             {err}
                         </label>
