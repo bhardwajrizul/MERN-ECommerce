@@ -121,10 +121,10 @@ export default function CartPage() {
             let newPrice =
                 Math.ceil(product?.price - (product?.price * (product?.discountPercent / 100)));
             return (
-                <div key={`${product?._id}_${size}_cart`} className="w-[90%] flex flex-row bg-base-200 rounded-lg  my-2 p-4 items-center justify-around">
+                <div key={`${product?._id}_${size}_cart`} className="w-[90%] flex flex-row flex-wrap bg-base-200 rounded-lg  my-2 p-4 items-center justify-around">
                     <div
                         onClick={() => navigate(`/products/${product?._id}`)}
-                        className="flex p-1 rounded-lg flex-row items-center justify-around hover:bg-base-100 hover:cursor-pointer transition">
+                        className="flex p-1 rounded-lg flex-row flex-wrap items-center justify-around hover:bg-base-100 hover:cursor-pointer transition">
                         <div className="h-24 overflow-hidden rounded-lg">
                             <img className="h-full object-cover" src={product?.image || 'https://via.placeholder.com/150'} />
                         </div>

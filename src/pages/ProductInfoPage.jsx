@@ -160,7 +160,7 @@ const ProductInfoPage = () => {
                                     <>
                                         {
                                             wishlistLoading ? <span className="loading loading-spinner text-error"></span> :
-                                                <Button onClick={handleAddToWishlist} dark className={`flex flex-row items-center${sizeErr && 'bg-red-400 cursor-not-allowed'}`}>
+                                                <Button onClick={handleAddToWishlist} dark className={`flex flex-row me-1 items-center${sizeErr && 'bg-red-400 cursor-not-allowed'}`}>
                                                     {
                                                         !sizeErr ?
                                                             <>
@@ -176,7 +176,7 @@ const ProductInfoPage = () => {
                                             <>
                                                 {
                                                     cartLoading ? <span className="loading loading-spinner text-error"></span> :
-                                                        <Button onClick={handleAddToCart} dark className={`flex flex-row items-center${sizeErr && 'bg-red-400 cursor-not-allowed'}`}>
+                                                        <Button onClick={handleAddToCart} dark className={`flex flex-row me-1 items-center${sizeErr && 'bg-red-400 cursor-not-allowed'}`}>
                                                             {
                                                                 !sizeErr ?
                                                                     <>

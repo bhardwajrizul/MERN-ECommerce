@@ -54,7 +54,7 @@ export default function Payment() {
 
     return (
         <div className=
-            {`artboard artboard-horizontal flex flex-col justify-center items-center phone-2 p-4 ${!confirm ? 'bg-red-200' : 'bg-green-200'} mx-auto my-10 rounded-lg`}>
+            {`lg:artboard artboard-horizontal flex flex-col justify-center items-center phone-2 p-4 ${!confirm ? 'bg-red-200' : 'bg-green-200'} mx-auto my-10 rounded-lg`}>
             {
                 isFetching
                     ? <span className="loading loading-bars loading-lg text-error"></span>

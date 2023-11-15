@@ -45,14 +45,14 @@ export default function OrdersPage() {
                             </h1>
                         </Panel>
                     </div>
-                    <div className="bg-base-200 rounded-lg px-10 py-3">
+                    <div className="bg-base-200 rounded-lg px-10 py-3 ">
                         {
                             items.map(({ product, quantity, size }) => {
                                 return (
                                     <div
                                         key={`${transaction_id}_${product?._id}_order`}
                                         onClick={() => navigate(`/products/${product?._id}`)}
-                                        className="flex p-1 rounded-lg flex-row items-center justify-around hover:bg-base-100 hover:cursor-pointer transition">
+                                        className="flex p-1 rounded-lg flex-row flex-wrap bg-base-100 my-1 items-center justify-around hover:bg-base-300 hover:cursor-pointer transition">
                                         <div className="h-24 overflow-hidden rounded-lg">
                                             <img className="h-full object-cover" src={product?.image || 'https://via.placeholder.com/150'} />
                                         </div>

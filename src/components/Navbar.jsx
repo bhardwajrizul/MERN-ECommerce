@@ -136,7 +136,7 @@ export default function Navbar() {
                         </li>
                         <li>
                             <Link onClick={handleTodaysOffer} to='/products'>
-                                Explore Shop
+                                Explore More
                                 <BsCaretRightFill className="ms-[-5px] mb-0.5 fill-pink-500" />
                             </Link>
                         </li>
@@ -184,7 +184,7 @@ export default function Navbar() {
                     </li>
                     <li>
                         <Link onClick={handleTodaysOffer} to='/products'>
-                            Explore Shop
+                            Explore More
                             <BsCaretRightFill className="ms-[-5px] mb-0.5 fill-pink-500" />
                         </Link>
                     </li>
@@ -203,13 +203,13 @@ export default function Navbar() {
                     userId && !loadingUser &&
                     <>
                         <Link to={`/user/${userId}/wishlist`}>
-                            <AiFillHeart className="text-4xl lg:mr-8 mr-1 fill-red-400 hover:fill-red-700 transition" />
+                            <AiFillHeart className="text-4xl lg:mr-8 mr-2 fill-red-400 hover:fill-red-700 transition" />
                         </Link>
                         <Link to={`/user/${userId}/cart`}>
-                            <BsFillCartFill className="text-3xl lg:mr-8 mr-1 fill-blue-400 hover:fill-pink-700 transition" />
+                            <BsFillCartFill className="text-3xl lg:mr-8 mr-2 fill-blue-400 hover:fill-pink-700 transition" />
                         </Link>
                         <Link to={`/user/${userId}`}>
-                            <FaUserCircle className="text-4xl lg:mr-4 mr-1" />
+                            <FaUserCircle className="text-4xl lg:mr-4 mr-0" />
                         </Link>
                     </>
                 }

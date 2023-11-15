@@ -3,8 +3,8 @@ function ProductSkeleton() {
     return (
         <div className="hero min-h-screen bg-white">
             <div className="hero-content w-full flex-col lg:flex-row items-start justify-around">
-                <div className="lg:w-2/6 sm:w-3/5 rounded">
-                    <div className="w-full flex flex-col">
+                <div className="lg:w-2/6 w-full rounded">
+                    <div className="w-full flex flex-col items-center">
                         <Skeleton times={1} className='w-full h-96 mx-[-35px]' />
                         <div className="w-full flex items-center justify-start mx-[-35px]">
                             <Skeleton times={4} className='w-20 h-20 me-2' />

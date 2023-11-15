@@ -81,7 +81,7 @@ export default function ProductsPage() {
 
     let content;
     if (isLoading) {
-        content = <Skeleton times={6} className='h-96 sm:w-[90%] w-36 mx-2 my-6 px-4' />
+        content = <Skeleton times={6} className='h-96 sm:w-[95%] mx-2 my-6 px-4' />
     } else if (error) {
         console.error(error)
         content = (
