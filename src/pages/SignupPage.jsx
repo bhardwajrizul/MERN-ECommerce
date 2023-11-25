@@ -73,6 +73,7 @@ export default function SignupPage() {
         setLoading(true);
 
         try {
+            
             // Create user with Firebase Auth
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;

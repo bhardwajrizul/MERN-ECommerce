@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import StyleSpan from "./StyleSpan";
 import UserAvatar from "./User/components/Avatar";
 import { Link, useLocation } from "react-router-dom";
-import { FaSearch, FaUserCircle } from 'react-icons/fa'
+import { FaSearch, FaUserCircle, FaTshirt } from 'react-icons/fa'
 import { AiFillHeart, AiOutlineSearch } from 'react-icons/ai'
 import { GiHealthNormal } from 'react-icons/gi'
 import { BsFillCartFill, BsCaretRightFill, BsFillPhoneFill } from 'react-icons/bs'
@@ -93,7 +93,7 @@ export default function Navbar() {
 
     return (
         <div className="navbar bg-base-100 rounded relative z-10">
-            <div className="navbar-start">
+            <div className="navbar-start me-4">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -110,8 +110,8 @@ export default function Navbar() {
 
                         <li tabIndex={0}>
                             <details>
-                                <summary>Clothing
-                                    {/* <FaShirt /> */}
+                                <summary className="pe-0">Clothing
+                                    <FaTshirt className="ms-[-5px] fill-gray-700 text-lg" />
                                 </summary>
                                 <ul className="p-2">
                                     <li><Link onClick={handleClothesMen} to='/products'>Men</Link></li>
@@ -143,11 +143,11 @@ export default function Navbar() {
 
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case sm:hidden lg:flex lg:text-2xl text-xl font-h-b flex-wrap rounded hover:bg-transparent">MERN<StyleSpan className='lg:text-2xl text-xl'>Ecommerce</StyleSpan> </Link>
+                <Link to='/' className="btn btn-ghost me-2 normal-case sm:hidden lg:flex lg:text-2xl text-xl font-h-b flex-wrap rounded hover:bg-transparent">MERN<StyleSpan className='lg:text-2xl text-xl'>Ecommerce</StyleSpan> </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 flex items-center">
-                    <li className="bg-base-300 rounded-full ms-10 me-1 flex flex-row justify-between">
+                    <li className="bg-base-300 rounded-full ms-14 flex flex-row justify-between">
                         <input value={searchTerm} onChange={handleSearchChange} className="bg-base-300 text-red-900" />
                         <Link
                             to={searchTerm.trim() ? `/products?query=${searchTerm}` : `/products`}
@@ -156,10 +156,10 @@ export default function Navbar() {
                         </Link>
                     </li>
 
-                    <li tabIndex={0}>
+                    <li tabIndex={0} className="p-0">
                         <details>
-                            <summary>Clothing
-                                {/* <FaShirt /> */}
+                            <summary className="pe-0">Clothing
+                                <FaTshirt className="ms-[-5px] fill-gray-700 text-lg" />
                             </summary>
                             <ul className="p-2">
                                 <li><Link onClick={handleClothesMen} to='/products'>Men</Link></li>
@@ -191,7 +191,6 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-
                 {
                     loadingUser &&
                     <Link className="btn rounded">

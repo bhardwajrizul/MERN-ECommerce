@@ -45,7 +45,7 @@ export default function OrdersPage() {
                             </h1>
                         </Panel>
                     </div>
-                    <div className="bg-base-200 rounded-lg px-10 py-3 ">
+                    <div className="bg-base-200 rounded-lg px-10 py-3">
                         {
                             items.map(({ product, quantity, size }) => {
                                 return (

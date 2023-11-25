@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProductsPage from './pages/ProductsPage'
 import ScrollToTop from './components/ScrollToTop';
+import UserGuide from './components/UserGuide';
 
 
 import cardData from "./utils/cardData"
@@ -34,6 +35,7 @@ import TooManyReq from './pages/TooManyReq';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import TermsAndConditions from './pages/Terms&Conditions';
+import AddProductPage from './pages/AddProductPage';
 
 function App() {
   const { filterCount, userLoading, userId, token } = useSelector((state) => {
@@ -83,12 +85,14 @@ function App() {
         <ScrollToTop />
         {/* HEADER */}
         <Navbar />
+        <UserGuide />
         {/* ROUTES */}
         <Routes>
           <Route path='/' element={<Homepage cardData={cardData} features={features} />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/products' element={<ProductsPage />} />
+          <Route path='/products/new' element={<AddProductPage />} />
           <Route path='/products/:pid' element={<ProductInfoPage />} />
           <Route path='/user/:uid' element={<ProfilePage />} />
           <Route path='/user/:uid/wishlist' element={<WishlistPage />} />
