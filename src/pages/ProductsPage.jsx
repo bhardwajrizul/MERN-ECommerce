@@ -3,7 +3,7 @@ import ProductCard from "../components/Products/ProductCard"
 import ShowMore from "../components/Products/ShowMore";
 import Panel from "../components/Panel";
 import FilterContainer from "../components/Filter/FilterContainer";
-import { useMemo, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     useFetchProductsQuery,
@@ -18,6 +18,8 @@ import CategoryFilter from "../components/Filter/components/CategoryFilter";
 import DiscountFilter from "../components/Filter/components/DiscountFilter";
 import GenderFilter from "../components/Filter/components/GenderFilter";
 import RatingFilter from "../components/Filter/components/RatingFilter";
+
+import { isEqual } from 'lodash';
 
 const NoProducts = () => {
     return (
@@ -35,13 +37,12 @@ const NoProducts = () => {
 
 export default function ProductsPage() {
 
-    const [searchParams] = useSearchParams()
-    const searchQuery = searchParams.get('query') || null
-
+    const [searchParams] = useSearchParams();
+    const searchQuery = searchParams.get('query') || null;
 
     const dispatch = useDispatch();
 
-    
+
     const { products, page, filters } = useSelector((state) => {
         return {
             products: state.products.data,
@@ -49,10 +50,10 @@ export default function ProductsPage() {
             filters: state.filters
         }
     })
-    
-    const memoizedFilters = useMemo(() => filters, [filters]);
-    const memoizedSearchQuery = useMemo(() => searchQuery, [searchQuery]);
-    
+
+    const prevFilters = useRef(filters);
+    const prevSearchQuery = useRef(searchQuery);
+
 
     const {
         data,
@@ -60,14 +61,21 @@ export default function ProductsPage() {
         isLoading,
         isFetching
     } = useFetchFilteredProductsQuery({
-            page,
-            filters: memoizedFilters,
-            searchQuery: memoizedSearchQuery
-        })
+        page,
+        filters,
+        searchQuery
+    })
 
     useEffect(() => {
-        dispatch(resetProductsAndPage())
-    }, [memoizedFilters, memoizedSearchQuery])
+        if (!isEqual(prevFilters.current, filters)) {
+            dispatch(resetProductsAndPage());
+            prevFilters.current = filters;
+        }
+        if (!isEqual(prevSearchQuery.current, searchQuery)) {
+            dispatch(resetProductsAndPage());
+            prevSearchQuery.current = searchQuery;
+        }
+    }, [filters, searchQuery]);
 
 
     useEffect(() => {

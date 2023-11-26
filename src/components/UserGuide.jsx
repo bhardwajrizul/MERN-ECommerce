@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Panel from "./Panel";
 import { ImCross } from 'react-icons/im'
 import CopyToClipboard from "./Copy";
@@ -10,6 +10,11 @@ export default function UserGuide() {
     const toggleGuide = () => {
         setGuideVisible(!guideVisible);
     };
+
+    useEffect(() => {
+        const timer = setTimeout(() => setGuideVisible(false), 1000)
+        return () => clearTimeout(timer);
+    }, [])
 
     return (
         <>
@@ -33,7 +38,7 @@ export default function UserGuide() {
                             User Guide!
                         </h1>
                         <div className="stats stats-vertical shadow w-full bg-white">
-                            
+
                             <div className="stat">
                                 <p className="font-t text-gray-500">Use these test cards or test UPI at payment gateway for testing. </p>
                                 <div className="font-t text-sm flex flex-col">
@@ -72,6 +77,14 @@ export default function UserGuide() {
                                         <p className="text-sm font-h-b text-gray-600">Expiry Date</p>
                                         <p>Any future date</p>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div className="stat">
+                                <div className="stat-title">Cold Server Start!</div>
+
+                                <div className="font-t text-sm">
+                                    Sometimes on initial page load website might take upto<span className="font-t-b"> 30 sec </span> to display products!
                                 </div>
                             </div>
 
