@@ -3,7 +3,7 @@ import ProductCard from "../components/Products/ProductCard"
 import ShowMore from "../components/Products/ShowMore";
 import Panel from "../components/Panel";
 import FilterContainer from "../components/Filter/FilterContainer";
-import { useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     useFetchProductsQuery,
@@ -41,6 +41,7 @@ export default function ProductsPage() {
 
     const dispatch = useDispatch();
 
+    
     const { products, page, filters } = useSelector((state) => {
         return {
             products: state.products.data,
@@ -48,19 +49,25 @@ export default function ProductsPage() {
             filters: state.filters
         }
     })
-
+    
+    const memoizedFilters = useMemo(() => filters, [filters]);
+    const memoizedSearchQuery = useMemo(() => searchQuery, [searchQuery]);
+    
 
     const {
         data,
         error,
         isLoading,
         isFetching
-    } = useFetchFilteredProductsQuery({ page, filters, searchQuery })
+    } = useFetchFilteredProductsQuery({
+            page,
+            filters: memoizedFilters,
+            searchQuery: memoizedSearchQuery
+        })
 
     useEffect(() => {
         dispatch(resetProductsAndPage())
-    }, [filters, searchQuery])
-
+    }, [memoizedFilters, memoizedSearchQuery])
 
 
     useEffect(() => {

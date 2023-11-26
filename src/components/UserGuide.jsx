@@ -5,7 +5,7 @@ import CopyToClipboard from "./Copy";
 import StyleSpan from "./StyleSpan";
 
 export default function UserGuide() {
-    const [guideVisible, setGuideVisible] = useState(true);
+    const [guideVisible, setGuideVisible] = useState(false);
 
     const toggleGuide = () => {
         setGuideVisible(!guideVisible);

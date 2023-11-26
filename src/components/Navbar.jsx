@@ -123,12 +123,12 @@ export default function Navbar() {
                         <li>
                             <Link
                                 onClick={handleElectronics}
-                                to='products'>Electronics
+                                to='/products'>Electronics
                                 <BsFillPhoneFill className="mb-1 text-sm ms-[-5px] fill-gray-700" />
                             </Link>
                         </li>
                         <li>
-                            <Link className="flex flex-row items-center justify-start" onClick={handleB_H} to='products'>
+                            <Link className="flex flex-row items-center justify-start" onClick={handleB_H} to='/products'>
                                 Beauty
                                 <GiHealthNormal className="mx-[-5px] text-xs mb-0.5 fill-red-700" />
                                 Health
@@ -171,12 +171,12 @@ export default function Navbar() {
                     <li>
                         <Link
                             onClick={handleElectronics}
-                            to='products'>Electronics
+                            to='/products'>Electronics
                             <BsFillPhoneFill className="mb-1 text-sm ms-[-5px] fill-gray-700" />
                         </Link>
                     </li>
                     <li>
-                        <Link className="flex flex-row items-center justify-center" onClick={handleB_H} to='products'>
+                        <Link className="flex flex-row items-center justify-center" onClick={handleB_H} to='/products'>
                             Beauty
                             <GiHealthNormal className="mx-[-5px] text-xs mb-0.5 fill-red-700" />
                             Health
