@@ -5,7 +5,7 @@ import CopyToClipboard from "./Copy";
 import StyleSpan from "./StyleSpan";
 
 export default function UserGuide() {
-    const [guideVisible, setGuideVisible] = useState(false);
+    const [guideVisible, setGuideVisible] = useState(true);
 
     const toggleGuide = () => {
         setGuideVisible(!guideVisible);
@@ -21,7 +21,7 @@ export default function UserGuide() {
                 </div>
 
                 <div
-                    className={`fixed right-5 bottom-14 mb-1 w-[90vw] z-30 lg:w-96 border-double  border-4 rounded-lg transition-all h-[70%] bg-white overflow-y-scroll  ${!guideVisible && 'h-[0px] w-[0px] w-[0vw] h-0 w-0 lg:w-0 border-none'}`}
+                    className={`fixed right-5 bottom-14 mb-1 z-30 rounded-lg transition-all bg-white overflow-y-scroll  ${!guideVisible ? 'h-[0px] w-[0px] w-[0vw] h-0 w-0 lg:w-0 border-none' : 'lg:w-96 w-[90vw] h-[70%] border-double  border-4'}`}
                 >
                     <div className="p-0 relative flex flex-col items-center justify-center">
                         <div className="sticky top-0 w-full">
