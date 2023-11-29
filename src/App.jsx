@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-
+// this is a random comment
 import Homepage from './pages/Homepage'
 import Navbar from './components/Navbar';
 import Panel from './components/Panel';
