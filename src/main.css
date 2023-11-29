@@ -6,6 +6,7 @@
 @font-face {
     font-family: 'Cormo Bold';
     src: url('/fonts/CormorantGaramond-Bold.ttf') format('truetype');
+    
     font-weight: bold;
   }
   
