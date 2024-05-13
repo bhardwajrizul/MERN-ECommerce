@@ -23,9 +23,9 @@ export default function Footer() {
 
             </nav>
             <aside>
-                <p>Copyright © 2023 - All right reserved by MERN-Ecommerce</p>
+                <p>Copyright © 2024 - All right reserved by MERN-Ecommerce</p>
                 <p>Created by -
-                    {/* Rizul, Madhav and Sneha */}
+                    {/* Rizul */}
                     <a className="text-blue-400 mx-1 underline" target="_blank" href="https://www.linkedin.com/in/rizul/">Rizul</a>
                 </p>
 

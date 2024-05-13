@@ -11,10 +11,12 @@ export default function UserGuide() {
         setGuideVisible(!guideVisible);
     };
 
-    useEffect(() => {
-        const timer = setTimeout(() => setGuideVisible(false), 1000)
-        return () => clearTimeout(timer);
-    }, [])
+    // Shows guide for 1 sec on initial page load
+    // Commented because guide should stay open until user closes it manually ?
+    // useEffect(() => {
+    //     const timer = setTimeout(() => setGuideVisible(false), 1000)
+    //     return () => clearTimeout(timer);
+    // }, [])
 
     return (
         <>
