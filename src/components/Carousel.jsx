@@ -1,4 +1,4 @@
-import CarouselVideo from '../assets/1.mp4'
+import CarouselVideo from '../assets/1.webm'
 import { resetAll } from '../store';
 import Button from './Button'
 import { Link } from 'react-router-dom';
